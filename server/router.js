@@ -20,12 +20,15 @@ const otpStore = new Map();
 
 // Nodemailer setup (use your credentials or app password)
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true, // true for port 465, false for 587
   auth: {
-    user: "mvasagan099@gmail.com",
-    pass: "njek bmso axgo kkyh"
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
+
 function generateOtp() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
@@ -1911,6 +1914,7 @@ router.post('/editstatuspro/:id',(req,res)=>{
         });
     });
 });
+
 
 
 module.exports=router;
