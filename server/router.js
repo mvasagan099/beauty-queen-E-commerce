@@ -27,8 +27,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-mod
-
 function generateOtp() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
@@ -1918,6 +1916,7 @@ router.post('/editstatuspro/:id',(req,res)=>{
 
 
 module.exports=router;
+
 
 
 
