@@ -31,10 +31,12 @@ app.use('/',routes);
 
 
 //const port=process.env.X_ZOHO_CATALYST_LISTEN_PORT  || 3306;
-const port=0.0.0.0;
+const port = process.env.PORT || 3000;
+
 app.listen(port,()=>{
   console.log('listening port :'+ port);
   });
+
 
 
 
