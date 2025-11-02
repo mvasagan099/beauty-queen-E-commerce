@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Queen</title>
+    <link rel="shortcut icon" href="./assets/images/logo/bq.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css?v={{timestamp}}">
+</head>
+<body class="login-body">
+   
+    <div class="login">
+        {{#if error}}
+    <div class="alertmsg">{{error}}</div>
+         {{/if}}
+         <h2>Edit product info</h2>
+        <form action="/editthispross/{{product.id}} " method="post">
+            <input type="number" name="id" placeholder="id" value="{{product.id}}">
+            <input type="text" name="name" placeholder="Enter name" value="{{product.name}}">
+            <input type="number" name="price" placeholder="Enter price" value="{{product.price}}">
+            <input type="text" name="description" placeholder="Enter Description" value="{{product.description}}">
+            <input type="number" name="mrp" placeholder="mrp" value="{{product.mrp}}">
+            
+            <input type="text" name="size_s" placeholder="Size_s" value="{{product.size_s}}">
+            <input type="text" name="size_m" placeholder="Size_m" value="{{product.size_m}}">
+            <input type="text" name="size_l" placeholder="Size_l" value="{{product.size_l}}">
+            <input type="text" name="size_xl" placeholder="Size_xl" value="{{product.size_xl}}">
+            <input type="text" name="size_xxl" placeholder="Size_xxl" value="{{product.size_xxl}}">
+
+            
+            
+            
+            <button type="submit" name="submit" id="login-submit">Upadte</button>
+             
+        </form>
+    </div>
+    
+</body>
+</html>

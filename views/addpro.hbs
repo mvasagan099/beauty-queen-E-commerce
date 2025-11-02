@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Queen product</title>
+     <link rel="shortcut icon" href="./assets/images/logo/bq.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css?v={{timestamp}}">
+</head>
+<body>
+    
+
+
+    <div class="profile-bar"  >
+        <h2><i class="fa-solid fa-xmark" onclick="closeprofilebar()"></i></h2>
+        <p onclick="showviewprofilebar()" ><i class="fa-solid fa-user" ></i> Profile</p>
+        <p onclick="showviewcart()"><i class="fa-solid fa-cart-shopping"></i> Cart</p>
+    </div>
+
+    <div class="header">
+        <h1 class="isale"> isale product</h1>
+        <h2>Add your product for sale!</h2>
+    </div>
+    {{#if msg}}
+    <div class="alertmsg">{{msg}}</div>
+    {{/if}}
+
+
+    <div class="sale-product">
+        <form method="post" action="/addpro" enctype="multipart/form-data">
+            <input type="number" name="id" placeholder="Enter ID" required>
+            <input type="text" name="name" placeholder="Enter product name" required>
+            <input type="text" name="size_s" placeholder="Enter count of S size " required>
+             <input type="text" name="size_m" placeholder="Enter count of M size " required>
+              <input type="text" name="size_l" placeholder="Enter count of L size " required>
+               <input type="text" name="size_xl" placeholder="Enter count of XL size " required>
+                <input type="text" name="size_xxl" placeholder="Enter count of XXL size " required>
+
+             <input type="number" name="mrp" placeholder="Enter mrp price" required>
+            <input type="number" name="price" placeholder="Enter price" required>
+             <select name="ptype" id="">
+                <option value="saree">saree</option>
+                <option value="kurthi">Kurthi</option>
+                <option value="top">tops</option>
+                <option value="leggin">Leggins</option>
+                <option value="jewellery">jewellery</option>
+                <option value="cosmetics">cosmetics</option>
+                <option value="lens">lens</option>
+                <option value="perfume">perfume</option>
+                <option value="bags">bags</option>
+            </select>
+            <input type="number" name="quantity" placeholder="Enter Quantity" required>
+            <textarea name="description" rows="12" cols="40" placeholder="description about the product"></textarea>
+            <input type="file" name="image" accept="image/*" required>
+            <input type="file" name="image1" accept="image/*" >
+            <input type="file" name="image2" accept="image/*" >
+            <input type="file" name="image3" accept="image/*" >
+            <input type="file" name="image4" accept="image/*" >
+           
+            <div>
+                <button value="submit"> add product</button>
+                <a value="cancel" href="/allmanagerpro">cancel</a>
+            </div>
+
+        </form>
+   
+    <div class="shadow" onclick="closeany()" ></div>
+
+</body>
+<script src="./script/script.js"></script>
+<script src="./script/script2.js"></script>
+</html>

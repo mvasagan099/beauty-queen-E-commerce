@@ -1,0 +1,43 @@
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<form id="upiForm" method="POST" action="/cartpayment" style="display:none;">
+  {{#each productIds}}
+    <input type="hidden" name="productid[]" value="{{this}}">
+  {{/each}}
+  {{#each sizes}}
+    <input type="hidden" name="size[]" value="{{this}}">
+  {{/each}}
+  {{#each quantities}}
+    <input type="hidden" name="quantity[]" value="{{this}}">
+  {{/each}}
+  {{#each totals}}
+    <input type="hidden" name="total[]" value="{{this}}">
+  {{/each}}
+  <input type="hidden" name="username" value="{{username}}">
+  <input type="hidden" name="email" value="{{email}}">
+  <input type="hidden" name="address" value="{{address}}">
+  <input type="hidden" name="pincode" value="{{pincode}}">
+  <input type="hidden" name="district" value="{{district}}">
+  <input type="hidden" name="landmark" value="{{landmark}}">
+  <input type="hidden" name="payment" value="UPI">
+  <input type="hidden" name="upiId" id="upiIdField" value="">
+</form>
+
+<script>
+  var options = {
+    key: "{{key_id}}",
+    amount: {{total}} * 100,
+    currency: "INR",
+    name: "My Shop",
+    description: "Order Payment",
+    order_id: "{{order_id}}",
+    handler: function(response) {
+      // On payment success, attach payment ID and submit hidden form
+      document.getElementById("upiIdField").value = response.razorpay_payment_id;
+      document.getElementById("upiForm").submit();
+    },
+    theme: { color: "#3399cc" }
+  };
+  var rzp = new Razorpay(options);
+  rzp.open();
+</script>

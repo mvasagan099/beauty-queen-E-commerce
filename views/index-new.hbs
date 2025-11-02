@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beauty Queen</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo/bq.png" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+
+
+  <div class="overlay" data-overlay></div>
+
+  <!--
+    - MODAL
+  -->
+
+  <div class="modal" data-modal>
+
+    <div class="modal-close-overlay" data-modal-overlay></div>
+
+    <div class="modal-content">
+
+      <button class="modal-close-btn" onclick="closeprofile()" data-modal-close>
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+
+      <div class="newsletter-img">
+        <img src="./assets/images/newsletter.png" alt="subscribe newsletter" width="400" height="400">
+      </div>
+
+      <div class="newsletter">
+
+       
+
+            <div class="newsletter-header">
+
+            <h3 class="newsletter-title">Welcome to Beauty Queen</h3>
+
+            <p class="newsletter-desc">
+              Welcome to <b>Beauty Queen Boutique</b> to get latest products and discount update.
+            </p>
+
+          </div>
+          <table>
+         {{#if title2}}
+           <a href="/login"><button type=""  class="btn-newsletter">Login</button>
+</a>
+{{/if}}
+{{#if title1}}
+         <input type="email" name="email" class="email-field" value="{{title1}}" placeholder="Email Address" required>
+           <a href="/clear-mail"><button type=""  class="btn-newsletter">Logout</button>
+</a>
+{{/if}}
+          <a href="/contact"><button type=""  class="btn-newsletter">Contact us</button>
+</a>
+          
+          </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!--
+    - NOTIFICATION TOAST
+  -->
+
+  <div class="notification-toast" data-toast>
+
+    <button class="toast-close-btn" data-toast-close>
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+
+   <div class="toast-banner">
+      <img src="./assets/images/products/jewellery-1.jpg" alt="Rose Gold Earrings" width="80" height="70">
+    </div>
+
+   
+    <div class="toast-detail">
+
+      <p class="toast-message">
+        Someone in new just bought
+      </p>
+
+      <p class="toast-title">
+        Rose Gold Earrings
+      </p>
+
+      <p class="toast-meta">
+        <time datetime="PT2M">2 Minutes</time> ago
+      </p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!--
+    - HEADER
+  -->
+
+  <header>
+
+    <div class="header-top">
+
+      <div class="container">
+
+        <ul class="header-social-container">
+
+          <li>
+            <a href="https://www.facebook.com/share/17SYRpjW46/" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="https://youtube.com/@beautyqueenperambalur?si=0xr-t5qIJm_cv99t" class="social-link">
+              <ion-icon name="logo-youtube"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="https://www.instagram.com/beauty_queen_perambalur?igsh=MWtsOHg2c3pxNmdqOA==" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="header-alert-news">
+          <p>
+            <b>Free Shipping</b>
+            This Week Order Over - Rs:1499
+          </p>
+        </div>
+
+        <div class="header-top-actions">
+
+
+          <select name="language">
+
+            <option value="en-US">English</option>
+            
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="header-main">
+
+      <div class="container">
+
+        <a href="/contact" class="header-logo">
+          <img src="./assets/images/logo/logo.jpg" alt="Isale's logo" width="190" height="70">
+        </a>
+
+        <div class="header-search-container">
+          <form action="/search" method="post">
+          <input type="text" name="search" class="search-field" placeholder="Enter your product name...">
+          
+          <button class="search-btn">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+</form>
+        </div>
+
+        <div class="header-user-actions">
+          
+          <button class="action-btn" onclick="openpersondetails()">
+            <ion-icon name="person-outline"></ion-icon>
+          </button>
+
+          <a href="/cart" ><button class="action-btn">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span class="count">Cart</span>
+          </button></a>
+
+          <a href="/orders">
+          <button class="action-btn" >
+            <ion-icon name="bag-handle-outline"></ion-icon>
+            <span class="count">Orders</span>
+          </button>
+          </a>
+          
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <nav class="desktop-navigation-menu">
+
+      <div class="container">
+
+        <ul class="desktop-menu-category-list">
+
+          <li class="menu-category">
+            <a href="/home" class="menu-title">Home</a>
+          </li>
+
+          <li class="menu-category">
+            <a href="#" class="menu-title">Categories</a>
+
+            <div class="dropdown-panel">
+
+              <ul class="dropdown-panel-list">
+
+                <li class="menu-title">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="earring">
+                  <button type="submit" href=""><a >Fasion</a></button>
+                  </form>
+                  
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="lipstick">
+                  <button  type="submit" href=""><a >lipstick</a></button>
+                  </form>
+                </li>
+
+                <li class="panel-list-item">
+                   <form action="/search" method="post">
+                  <input type="hidden" name="search" value="earring">
+                  <button  type="submit" href=""><a >Earrings</a></button>
+                  </form>
+                  
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="chain">
+                  <button  type="submit" ><a >Chain</a></button>
+                  </form>
+                  
+                </li>
+                  <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="bag">
+                  <button  type="submit" href=""><a >Bags</a></button>
+                  </form>
+                  
+                </li>
+
+               <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="glass">
+                  <button  type="submit" href=""><a >Glasses</a></button>
+                  </form>
+                  
+                </li>
+
+              
+
+              </ul>
+
+              <ul class="dropdown-panel-list">
+
+                <li class="menu-title">
+                  <a href="#">Ladies Special</a>
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="saree">
+                  <button  type="submit" href=""><a >Saree</a></button>
+                  </form>
+                  
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="kurthi">
+                  <button  type="submit" href=""><a >Kurthi</a></button>
+                  </form>
+                  
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="top">
+                  <button  type="submit" href=""><a >Tops</a></button>
+                  </form>
+                 
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="leggin">
+                  <button  type="submit" href=""><a >Leggins</a></button>
+                  </form>
+                  
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="plazzo">
+                  <button  type="submit" href=""><a >Plazzo phants</a></button>
+                  </form>
+                  
+                </li>
+
+               
+
+              </ul>
+
+              <ul class="dropdown-panel-list">
+
+                <li class="menu-title">
+                  <a href="#">Women's</a>
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="formal">
+                  <button  type="submit" href=""><a >Formals</a></button>
+                  </form>
+                  
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="casual">
+                  <button  type="submit" href=""><a >Casual</a></button>
+                  </form>
+                  
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="thuppatta">
+                  <button  type="submit" href=""><a >Thuppatta</a></button>
+                  </form>
+                  
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="cosmetics">
+                  <button  type="submit" href=""><a >Cosmetics</a></button>
+                  </form>
+                 
+                </li>
+
+                <li class="panel-list-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="bag">
+                  <button  type="submit" href=""><a >Bags</a></button>
+                  </form>
+                  
+                </li>
+
+                
+
+              </ul>
+
+              <ul class="dropdown-panel-list">
+
+                
+          <li class="menu-category">
+            <a href="#" class="menu-title">Women's</a>
+
+            <ul class="dropdown-list">
+
+              <li class="dropdown-item">
+                <a href="#">clothes</a>
+              </li>
+
+              <li class="dropdown-item">
+                <form action="/search" method="post">
+                  <input type="hidden" name="search" value="earring">
+                  <button  type="submit" href=""><a >Earrings</a></button>
+                  </form>
+                
+              </li>
+
+              <li class="dropdown-item">
+                <form action="/search" method="post">
+                  <input type="hidden" name="search" value="necklace">
+                  <button  type="submit" href=""><a >Necklace</a></button>
+                  </form>
+                
+              </li>
+
+              <li class="dropdown-item">
+                <form action="/search" method="post">
+                  <input type="hidden" name="search" value="makeup">
+                  <button  type="submit" href=""><a >Makeup kit</a></button>
+                  </form>
+                
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="menu-category">
+            <form action="/search" method="post">
+                  <input type="hidden" name="search" value="jwel">
+                  <button  type="submit" href=""><a  class="menu-title">jewelry</a></button>
+                  </form>
+            
+
+            <ul class="dropdown-list">
+
+              <li class="dropdown-item">
+                 <form action="/search" method="post">
+                  <input type="hidden" name="search" value="earring">
+                  <button  type="submit" href=""><a >Earrings</a></button>
+                  </form>
+              </li>
+
+              <li class="dropdown-item">
+                 <form action="/search" method="post">
+                  <input type="hidden" name="search" value="couple">
+                  <button  type="submit" href=""><a >Couple rings</a></button>
+                  </form>
+              </li>
+
+              <li class="dropdown-item">
+                 <form action="/search" method="post">
+                  <input type="hidden" name="search" value="necklace">
+                  <button  type="submit" href=""><a >Necklace</a></button>
+                  </form>
+              </li>
+
+              <li class="dropdown-item">
+                  <form action="/search" method="post">
+                  <input type="hidden" name="search" value="bracelet">
+                  <button  type="submit" href=""><a >Bracelets</a></button>
+                  </form>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="menu-category"> 
+             <form action="/search" method="post">
+                  <input type="hidden" name="search" value="saree">
+                  <button  type="submit" href=""><a  class="menu-title">Hot Offers</a></button>
+                  </form>
+           
+          </li>
+
+        </ul>
+
+      </div>
+
+    </nav>
+
+    <div class="mobile-bottom-navigation">
+
+      <button class="action-btn" data-mobile-menu-open-btn>
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+      <a href="/cart">
+      <button class="action-btn" onclick="opencart()">
+        
+        <ion-icon name="heart-outline"></ion-icon>
+        <span class="count">Cart</span>
+      </button>
+      </a>
+
+      <button class="action-btn" onclick="openpersondetails()">
+            <ion-icon name="person-outline"></ion-icon>
+          </button>
+      <a href="/orders">
+      <button class="action-btn">
+        <ion-icon name="bag-handle-outline"></ion-icon>
+
+        <span class="count">Orders</span>
+      </button>
+
+      </a>
+      
+      <button class="action-btn" data-mobile-menu-open-btn>
+        <ion-icon name="grid-outline"></ion-icon>
+      </button>
+
+    </div>
+
+    <nav class="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
+       
+      <div class="menu-top">
+        <h2 class="menu-title">Menu</h2>
+
+        <button class="menu-close-btn" data-mobile-menu-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
+      <ul class="mobile-menu-category-list">
+         <li class="menu-category">
+          <a href="/orders" class="menu-title">Orders</a>
+        </li>
+
+        <li class="menu-category">
+          <a href="/home" class="menu-title">Home</a>
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Ladies Special</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="saree">
+                  <button  type="submit" href=""><a >Saree</a></button>
+                  </form>
+                 
+             
+            </li>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="kurthi">
+                  <button  type="submit" href=""><a >kurthi</a></button>
+                  </form>
+                 
+              
+            </li>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="top">
+                  <button  type="submit" href=""><a >Tops</a></button>
+                  </form>
+                 
+             
+            </li>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="leggin">
+                  <button  type="submit" href=""><a >Leggins</a></button>
+                  </form>
+                 
+             
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Women's</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="plazzo">
+                  <button  type="submit" href=""><a >Plazzo Phants</a></button>
+                  </form>
+                 
+             
+            </li>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="ear">
+                  <button  type="submit" href=""><a >Earrings</a></button>
+                  </form>
+                 
+             
+            </li>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="necklace">
+                  <button  type="submit" href=""><a >Necklace</a></button>
+                  </form>
+                 
+              
+            </li>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="makeup">
+                  <button  type="submit" href=""><a >Makeup kit</a></button>
+                  </form>
+                 
+             
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title">Jewelry</p>
+
+            <div>
+              <ion-icon name="add-outline" class="add-icon"></ion-icon>
+              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+            </div>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="ear">
+                  <button  type="submit" href=""><a >Earrings</a></button>
+                  </form>
+            
+            </li>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="couple">
+                  <button  type="submit" href=""><a >Couple Rings</a></button>
+                  </form>
+                 
+            </li>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="necklace">
+                  <button  type="submit" href=""><a >Necklace</a></button>
+                  </form>
+                 
+            </li>
+
+            <li class="submenu-category">
+               <form action="/search" method="post">
+                  <input type="hidden" name="search" value="bracelet">
+                  <button  type="submit" href=""><a >Bracelets</a></button>
+                  </form>
+                 
+            </li>
+
+          </ul>
+
+        </li>
+
+
+        <li class="menu-category">
+           <form action="/search" method="post">
+                  <input type="hidden" name="search" value="hot">
+                  <button  type="submit" href=""><a >Hot Offers</a></button>
+                  </form>
+                 
+        </li>
+
+      </ul>
+
+
+      <div class="menu-bottom">
+
+        <ul class="menu-category-list">
+
+          <li class="menu-category">
+
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Language</p>
+
+              <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">English</a>
+              </li>
+            </ul>
+
+          </li>
+
+          <li class="menu-category">
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Currency</p>
+              <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+              
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Rupees &euro;</a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+
+        <ul class="menu-social-container">
+
+          <li>
+            <a href="https://www.facebook.com/share/17SYRpjW46/" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="https://youtube.com/@beautyqueenperambalur?si=0xr-t5qIJm_cv99t" class="social-link">
+              <ion-icon name="logo-youtube"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="https://www.instagram.com/beauty_queen_perambalur?igsh=MWtsOHg2c3pxNmdqOA==" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+
+
+
+  <!--
+    - MAIN
+  -->
+
+  <main>
+
+    <!--
+      - BANNER
+    -->
+
+    <div class="banner">
+
+      <div class="container">
+
+        <div class="slider-container has-scrollbar">
+
+          <div class="slider-item">
+
+            <img src="./assets/images/banner-1.jpg" alt="women's latest fashion sale" class="banner-img">
+
+            <div class="banner-content">
+
+              <p class="banner-subtitle">Trending item</p>
+
+              <h2 class="banner-title">Women's latest fashion sale</h2>
+
+              <p class="banner-text">
+                starting at  <b>299</b>.00
+              </p>
+
+              <a href="#" class="banner-btn">Shop now</a>
+
+            </div>
+
+          </div>
+
+          <div class="slider-item">
+
+            <img src="./assets/images/banner-2.jpg" alt="modern sunglasses" class="banner-img">
+
+            <div class="banner-content">
+
+              <p class="banner-subtitle">Trending accessories</p>
+
+              <h2 class="banner-title">Modern sunglasses</h2>
+
+              <p class="banner-text">
+                starting at <b>150</b>.00
+              </p>
+
+              <a href="#" class="banner-btn">Shop now</a>
+
+            </div>
+
+          </div>
+
+          <div class="slider-item">
+
+            <img src="./assets/images/banner-3.jpg" alt="new fashion summer sale" class="banner-img">
+
+            <div class="banner-content">
+
+              <p class="banner-subtitle">Sale Offer</p>
+
+              <h2 class="banner-title">New fashion summer sale</h2>
+
+              <p class="banner-text">
+                starting at <b>299</b>.00
+              </p>
+
+              <a href="#" class="banner-btn">Shop now</a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!--
+      - PRODUCT
+    -->
+
+    <div class="product-container">
+
+      <div class="container">
+
+
+        <!--
+          - SIDEBAR
+        -->
+
+        <div class="sidebar  has-scrollbar" data-mobile-menu>
+
+          <div class="sidebar-category">
+
+            <div class="sidebar-top">
+              <h2 class="sidebar-title">Category</h2>
+
+              <button class="sidebar-close-btn" data-mobile-menu-close-btn>
+                <ion-icon name="close-outline"></ion-icon>
+              </button>
+            </div>
+
+            <ul class="sidebar-menu-category-list">
+
+              <li class="sidebar-menu-category">
+
+                <button class="sidebar-accordion-menu" data-accordion-btn>
+
+                  <div class="menu-title-flex">
+                    <img src="./assets/images/icons/dress.svg" alt="clothes" width="20" height="20"
+                      class="menu-title-img">
+
+                    <p class="menu-title">Clothes</p>
+                  </div>
+
+                  <div>
+                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                  </div>
+
+                </button>
+
+                <ul class="sidebar-submenu-category-list" data-accordion>
+
+                  <li class="sidebar-submenu-category">
+                     <form action="/search" method="post">
+                  <input type="hidden" name="search" value="saree">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Saree</p>
+                    </a></button>
+                  </form>
+                 
+                   
+                  </li>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="kurthi">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Kurthi</p>
+                    </a></button>
+                  </form>
+                    
+                  </li>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="top">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Tops</p>
+                    </a></button>
+                  </form>
+                    
+                  </li>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="leggin">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Leggins</p>
+                    </a></button>
+                  </form>
+                    
+                  </li>
+
+                </ul>
+
+              </li>
+
+              
+              <li class="sidebar-menu-category">
+
+                <button class="sidebar-accordion-menu" data-accordion-btn>
+
+                  <div class="menu-title-flex">
+                    <img src="./assets/images/icons/jewelry.svg" alt="clothes" class="menu-title-img" width="20"
+                      height="20">
+
+                    <p class="menu-title">Jewelry</p>
+                  </div>
+
+                  <div>
+                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                  </div>
+
+                </button>
+
+                <ul class="sidebar-submenu-category-list" data-accordion>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="ear">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Earrings</p>
+                    </a></button>
+                  </form>
+                    
+                  </li>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="couple">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Couple Rings</p>
+                    </a></button>
+                  </form>
+                   
+                  </li>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="necklace">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Necklace</p>
+                    </a></button>
+                  </form>
+                    
+                  </li>
+
+                </ul>
+
+              </li>
+
+             
+
+              <li class="sidebar-menu-category">
+
+                <button class="sidebar-accordion-menu" data-accordion-btn>
+
+                  <div class="menu-title-flex">
+                    <img src="./assets/images/icons/cosmetics.svg" alt="cosmetics" class="menu-title-img" width="20"
+                      height="20">
+
+                    <p class="menu-title">Cosmetics</p>
+                  </div>
+
+                  <div>
+                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                  </div>
+
+                </button>
+
+                <ul class="sidebar-submenu-category-list" data-accordion>
+
+                  
+
+                  <li class="sidebar-submenu-category">
+                   <form action="/search" method="post">
+                  <input type="hidden" name="search" value="makeup">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Makeup kit</p>
+                    </a></button>
+                  </form>
+                  </li>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="shikakai">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">shikakai</p>
+                    </a></button>
+                  </form>
+                  </li>
+
+               
+
+                </ul>
+
+              </li>
+
+
+              <li class="sidebar-menu-category">
+
+                <button class="sidebar-accordion-menu" data-accordion-btn>
+
+                  <div class="menu-title-flex">
+                    <img src="./assets/images/icons/bag.svg" alt="bags" class="menu-title-img" width="20" height="20">
+
+                    <p class="menu-title">Bags</p>
+                  </div>
+
+                  <div>
+                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                    <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                  </div>
+
+                </button>
+
+                <ul class="sidebar-submenu-category-list" data-accordion>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="bag">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Shopping Bags</p>
+                    </a></button>
+                  </form>
+                  </li>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="bag">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Gim Bags</p>
+                    </a></button>
+                  </form>
+                  </li>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="bag">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Purce</p>
+                    </a></button>
+                  </form>
+                  </li>
+
+                  <li class="sidebar-submenu-category">
+                    <form action="/search" method="post">
+                  <input type="hidden" name="search" value="bag">
+                  <button  type="submit" href=""> <a class="sidebar-submenu-title">
+                      <p class="product-name">Wallet</p>
+                    </a></button>
+                  </form>
+                  </li>
+
+                </ul>
+
+              </li>
+
+            </ul>
+
+          </div>
+
+          <div class="product-showcase">
+
+            <h3 class="showcase-heading">Best Deals</h3>
+
+            <div class="showcase-wrapper">
+
+              <div class="showcase-container">
+                {{#each lowprice}}
+                <div class="showcase">
+
+                  <a href="/singlepro/{{this.id}}" class="showcase-img-box">
+                    <img src="/{{this.image}}" alt="{{this.name}}" width="75" height="75"
+                      class="showcase-img">
+                  </a>
+
+                  <div class="showcase-content">
+
+                    <a href="/singlepro/{{this.id}}">
+                      <h4 class="showcase-title">{{this.name}}</h4>
+                    </a>
+
+                  
+
+                    <div class="price-box">
+                      <del>Rs.{{this.mrp}}</del>
+                      <p class="price">Rs.{{this.price}}</p>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {{/each}}
+
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="product-box">
+
+          
+          <!--
+            - PRODUCT GRID
+          -->
+
+          <div class="product-main">
+
+            <h2 class="title">Beauty Queen Products</h2>
+
+            <div class="product-grid">
+              {{#each cloth}}
+             
+              <div class="showcase">
+
+                <div class="showcase-banner" >
+
+                  <img  src="/{{this.image}}" alt="{{this.name}}" width="300" class="product-img default">
+                  <img src="/{{this.image1}}" alt="{{this.name}}" width="300" class="product-img hover">
+
+                  <p class="showcase-badge angle black">sale</p>
+
+                  <div class="showcase-actions">
+                    
+                     <a href="/singlepro/{{this.id}}">
+                    <button class="btn-action">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </button>
+                    </a>
+
+                    <button type="button" 
+class="btn-action"
+          id="shareProductBtn" 
+          data-id="{{this.id}}" 
+          data-name="{{this.name}}">
+          <ion-icon name="share-outline"></ion-icon>
+  </button>
+
+                  </div>
+
+                </div>
+
+                <div class="showcase-content">
+
+                  <a href="/singlepro/{{this.id}}" class="showcase-category">{{this.ptype}}</a>
+
+                  <a href="/singlepro/{{this.id}}">
+                    <h3 class="showcase-title">{{this.name}}</h3>
+                  </a>
+
+                  
+
+                  <div class="price-box">
+                    <del>Rs.{{this.mrp}}</del>
+                    <p class="price">Rs.{{this.price}}</p>
+                    
+                  </div>
+                    <p class="price">ID :{{this.id}}</p>
+
+                </div>
+
+              </div>
+              {{/each}}
+
+              
+            
+            </div>
+      
+          </div>
+                
+          
+         
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+    <!--
+      - TESTIMONIALS, CTA & SERVICE
+    -->
+
+    <div>
+
+      <div class="container">
+
+        <div class="testimonials-box">
+
+          <!--
+            - TESTIMONIALS
+          -->
+
+          <div class="testimonial">
+
+            <h2 class="title">Owned By</h2>
+
+            <div class="testimonial-card">
+
+              <img src="./assets/images/bq.jpeg" alt="Owner pic " class="testimonial-banner" width="100" height="100">
+
+              <p class="testimonial-name">Mrs.MAHADEVI ELAIYARAJA</p>
+
+              <p class="testimonial-title">Beautician & 7+ years of Experience</p>
+
+              <img src="./assets/images/icons/quotes.svg" alt="quotation" class="quotation-img" width="26">
+
+              <p class="testimonial-desc">
+               Experienced beautician with 7+ years in hair styling, skin treatments, and makeup application, dedicated to helping clients achieve their desired look
+              </p>
+               <a href="/contact"><button type=""  class="btn-newsletter">Contact us</button>
+</a>
+            </div>
+
+          </div>
+
+
+
+          <!--
+            - CTA
+          -->
+
+          <div class="cta-container">
+
+            <img src="./assets/images/cta-banner.jpg" alt="summer collection" class="cta-banner">
+
+            <a href="#" class="cta-content">
+
+              <p class="discount">25% Discount</p>
+
+              <h2 class="cta-title">Summer collection</h2>
+
+              <p class="cta-text">Starting @ Rs 299</p>
+
+              <button class="cta-btn">Shop now</button>
+
+            </a>
+
+          </div>
+
+
+
+          <!--
+            - SERVICE
+          -->
+
+          <div class="service">
+
+            <h2 class="title">Our Services</h2>
+
+            <div class="service-container">
+
+              <a href="#" class="service-item">
+
+                <div class="service-icon">
+                  <ion-icon name="boat-outline"></ion-icon>
+                </div>
+
+                <div class="service-content">
+
+                  <h3 class="service-title">All Over India Delivery</h3>
+                  <p class="service-desc">For Order Over Rs 999</p>
+
+                </div>
+
+              </a>
+
+              <a href="#" class="service-item">
+              
+                <div class="service-icon">
+                  <ion-icon name="rocket-outline"></ion-icon>
+                </div>
+              
+                <div class="service-content">
+              
+                  <h3 class="service-title">Next Day delivery</h3>
+                  <p class="service-desc">Perambalur Dt Orders Only</p>
+              
+                </div>
+              
+              </a>
+
+              <a href="/contact" class="service-item">
+              
+                <div class="service-icon">
+                  <ion-icon name="call-outline"></ion-icon>
+                </div>
+              
+                <div class="service-content">
+              
+                  <h3 class="service-title">Best Online Support</h3>
+                  <p class="service-desc">Hours: 8AM - 8PM</p>
+              
+                </div>
+              
+              </a>
+
+              <a href="#" class="service-item">
+              
+                <div class="service-icon">
+                  <ion-icon name="arrow-undo-outline"></ion-icon>
+                </div>
+              
+                <div class="service-content">
+              
+                  <h3 class="service-title">Replacement Policy</h3>
+                  <p class="service-desc">Easy & Free Replacement</p>
+              
+                </div>
+              
+              </a>
+
+              <a href="#" class="service-item">
+              
+                <div class="service-icon">
+                  <ion-icon name="ticket-outline"></ion-icon>
+                </div>
+              
+                <div class="service-content">
+              
+                  <h3 class="service-title">20% money back</h3>
+                  <p class="service-desc">For Order Over Rs 1999</p>
+              
+                </div>
+              
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+
+
+
+  <!--
+    - FOOTER
+  -->
+
+  <footer>
+
+    <div class="footer-category">
+
+      <div class="container">
+
+        <h2 class="footer-category-title">Brand directory</h2>
+
+        <div class="footer-category-box">
+
+          <h3 class="category-box-title">Fashion :</h3>
+
+          <a href="#" class="footer-category-link">Saaree</a>
+          <a href="#" class="footer-category-link">Kurti</a>
+          <a href="#" class="footer-category-link">leggins</a>
+          <a href="#" class="footer-category-link">tops</a>
+          <a href="#" class="footer-category-link">dress & frock</a>
+          <a href="#" class="footer-category-link">innerwear</a>
+          <a href="#" class="footer-category-link">hosiery</a>
+
+        </div>
+
+        <div class="footer-category-box">
+          <h3 class="category-box-title">jewellery :</h3>
+        
+          <a href="#" class="footer-category-link">Necklace</a>
+          <a href="#" class="footer-category-link">Earrings</a>
+          <a href="#" class="footer-category-link">Couple rings</a>
+          <a href="#" class="footer-category-link">Pendants</a>
+          <a href="#" class="footer-category-link">Crystal</a>
+          <a href="#" class="footer-category-link">Bangles</a>
+          <a href="#" class="footer-category-link">bracelets</a>
+          <a href="#" class="footer-category-link">nosepin</a>
+          <a href="#" class="footer-category-link">chain</a>
+          <a href="#" class="footer-category-link">Earrings</a>
+          <a href="#" class="footer-category-link">Couple rings</a>
+        </div>
+
+        <div class="footer-category-box">
+          <h3 class="category-box-title">cosmetics :</h3>
+        
+          <a href="#" class="footer-category-link">Shampoo</a>
+          <a href="#" class="footer-category-link">Bodywash</a>
+          <a href="#" class="footer-category-link">Facewash</a>
+          <a href="#" class="footer-category-link">makeup kit</a>
+          <a href="#" class="footer-category-link">liner</a>
+          <a href="#" class="footer-category-link">lipstick</a>
+          <a href="#" class="footer-category-link">prefume</a>
+          <a href="#" class="footer-category-link">Body soap</a>
+          <a href="#" class="footer-category-link">scrub</a>
+          <a href="#" class="footer-category-link">hair gel</a>
+          <a href="#" class="footer-category-link">hair colors</a>
+          <a href="#" class="footer-category-link">hair dye</a>
+          <a href="#" class="footer-category-link">sunscreen</a>
+          <a href="#" class="footer-category-link">skin loson</a>
+          <a href="#" class="footer-category-link">liner</a>
+          <a href="#" class="footer-category-link">lipstick</a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="footer-nav">
+
+      <div class="container">
+
+        <ul class="footer-nav-list">
+
+          <li class="footer-nav-item">
+            <h2 class="nav-title">Popular Categories</h2>
+          </li>
+
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Fashion</a>
+          </li>
+
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Tradisional</a>
+          </li>
+
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Cosmetic</a>
+          </li>
+
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Health</a>
+          </li>
+
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Skincare</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-nav-list">
+        
+          <li class="footer-nav-item">
+            <h2 class="nav-title">Products</h2>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Prices drop</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">New products</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Best sales</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Contact us</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Sitemap</a>
+          </li>
+        
+        </ul>
+
+        <ul class="footer-nav-list">
+        
+          <li class="footer-nav-item">
+            <h2 class="nav-title">Our Company</h2>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Delivery</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Legal Notice</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Terms and conditions</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">About us</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Secure payment</a>
+          </li>
+        
+        </ul>
+
+        <ul class="footer-nav-list">
+        
+          <li class="footer-nav-item">
+            <h2 class="nav-title">Services</h2>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Prices drop</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">New products</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Best sales</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Contact us</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link">Sitemap</a>
+          </li>
+        
+        </ul>
+
+        <ul class="footer-nav-list">
+
+          <li class="footer-nav-item">
+            <h2 class="nav-title">Contact</h2>
+          </li>
+
+          <li class="footer-nav-item flex">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <address class="content">
+             VSK mahal,Veppur, perambalur, Tamilnadu 621717
+            </address>
+          </li>
+
+          <li class="footer-nav-item flex">
+            <div class="icon-box">
+              <ion-icon name="call-outline"></ion-icon>
+            </div>
+
+            <a href="tel:+918940026809" class="footer-nav-link">+91 9942762061</a>
+          </li>
+
+          <li class="footer-nav-item flex">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <a href="mailto:example@gmail.com" class="footer-nav-link">rajaqueens007@gmail.com</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-nav-list">
+
+          <li class="footer-nav-item">
+            <h2 class="nav-title">Follow Us</h2>
+          </li>
+
+          <li>
+            <ul class="social-link">
+
+              <li class="footer-nav-item">
+                <a href="https://www.facebook.com/share/17SYRpjW46/" class="footer-nav-link">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+              </li>
+
+              <li class="footer-nav-item">
+                <a href="https://youtube.com/@beautyqueenperambalur?si=0xr-t5qIJm_cv99t" class="footer-nav-link">
+                  <ion-icon name="logo-youtube"></ion-icon>
+                </a>
+              </li>
+
+
+              <li class="footer-nav-item">
+                <a href="https://www.instagram.com/beauty_queen_perambalur?igsh=MWtsOHg2c3pxNmdqOA==" class="footer-nav-link">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+      <div class="container">
+
+        <img src="./assets/images/payment.png" alt="payment method" class="payment-img">
+
+        <p class="copyright">
+          Copyright &copy; <a href="#">Isale</a> all rights reserved.
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+<script>
+  // Attach share event to all share buttons
+  document.querySelectorAll("#shareProductBtn").forEach(button => {
+    button.addEventListener("click", () => {
+      const productId = button.getAttribute("data-id");
+      const productName = button.getAttribute("data-name");
+      const productUrl = window.location.origin + "/singlepro/" + productId;
+
+      if (navigator.share) {
+        navigator.share({
+          title: productName,
+          text: "Check out this product!",
+          url: productUrl
+        }).then(() => {
+          console.log("Product shared successfully!");
+        }).catch((err) => {
+          console.log("Error sharing:", err);
+        });
+      } else {
+        navigator.clipboard.writeText(productUrl)
+          .then(() => alert("Product URL copied to clipboard!"))
+          .catch(() => alert("Could not copy URL"));
+      }
+    });
+  });
+</script>
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="/assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

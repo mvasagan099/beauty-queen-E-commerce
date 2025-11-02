@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Queen</title>
+    <link rel="shortcut icon" href="./assets/images/logo/bq.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css?v={{timestamp}}">
+</head>
+<body class="login-body">
+   <a href="/allordersofallmanagerpro"> <button type="submit"  name="allorders" id="login-submit">Show all orders</button></a>
+    <div class="login">
+        {{#if error}}
+    <div class="alertmsg">{{error}}</div>
+         {{/if}}
+         <h2>Edit product info</h2>
+        <form action="/editstatuspro/{{product.id}}" method="post">
+            <input type="text" name="status" placeholder="Wrong Id" value="{{product.status}}" required>
+            
+            <button type="submit" name="submit" id="login-submit">Update</button>
+           
+             
+           
+        </form>
+         <a href="/allmanagerpro">
+            <button  name="submit" id="login-submit">Back</button>
+            </a>
+    </div>
+    
+</body>
+</html>

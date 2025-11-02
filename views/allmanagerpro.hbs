@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Queen product</title>
+     <link rel="shortcut icon" href="./assets/images/logo/bq.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css?v={{timestamp}}">
+</head>
+<body class="login-body">
+   <div class="login">
+        {{#if error}}
+    <div class="alertmsg">{{error}}</div>
+         {{/if}}
+         <h2>Edit product info</h2>
+        <form action="/editthispro" method="post">
+            <input type="number" name="id" placeholder="id" required>
+            
+            <button type="submit" name="submit" id="login-submit">edit</button>
+            <button type="submit" formaction="/delete" name="remove" id="login-submit">Delete</button>
+            <button type="submit" formaction="/editorderstatus" name="edit" id="login-submit">Edit Status</button>
+        </form>
+         <a href="/allordersofallmanagerpro"> <button type="submit"  name="allorders" id="login-submit">Show all orders</button></a>
+    <a href="/addpro"> <button type="submit"  name="allorders" id="login-submit">Showcase your product</button></a>
+   
+    </div>
+    
+</body>
+</html>
