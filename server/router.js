@@ -20,14 +20,15 @@ const otpStore = new Map();
 
 // Nodemailer setup (use your credentials or app password)
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true, // true for port 465, false for 587
+  host: "smtp-relay.brevo.com",
+  port: 587,
+  secure: false, // true = 465, false = 587
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    user: process.env.BREVO_USER, // your Brevo email
+    pass: process.env.BREVO_PASS  // your Brevo SMTP key
   }
 });
+
 
 function generateOtp() {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -1918,3 +1919,4 @@ router.post('/editstatuspro/:id',(req,res)=>{
 
 
 module.exports=router;
+
