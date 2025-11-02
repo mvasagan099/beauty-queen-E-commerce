@@ -1,0 +1,51 @@
+
+CREATE Table products(
+    id INT AUTO_INCREMENT PRIMARY key,
+    name VARCHAR(100),
+    price int,
+    description text,
+    image longblob
+);
+
+
+
+
+alter Table products ADD COLUMN mrp int;
+
+alter Table products ADD COLUMN size VARCHAR(20);
+
+alter Table products ADD COLUMN quantity int;
+
+alter Table products ADD COLUMN ptype VARCHAR(100);
+
+alter Table products ADD COLUMN image1 longblob;
+alter Table products ADD COLUMN image2 longblob;
+alter Table products ADD COLUMN image3 longblob;
+alter Table products ADD COLUMN image4 longblob;
+alter Table products drop column size;
+alter Table products ADD COLUMN size_s int;
+alter Table products ADD COLUMN size_m int;
+alter Table products ADD COLUMN size_l int;
+alter Table products ADD COLUMN size_xl int;
+alter Table products ADD COLUMN size_xxl int;
+
+CREATE TABLE orders (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  productid INT NOT NULL,
+  name VARCHAR(255),
+  size VARCHAR(50),
+  price DECIMAL(10,2),
+  quantity INT,
+  subtotal DECIMAL(10,2),
+  username VARCHAR(255),
+  email VARCHAR(255),
+  address TEXT,
+  pincode VARCHAR(20),
+  district VARCHAR(100),
+  landmark VARCHAR(255),
+  payment_method VARCHAR(50),
+  status VARCHAR(50) DEFAULT 'Pending',
+  order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+

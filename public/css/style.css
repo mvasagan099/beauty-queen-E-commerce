@@ -1,0 +1,470 @@
+.header {
+    background-color: white;
+    color: black;
+    display:flex;
+    justify-content: space-between;
+    margin-left: 0%;
+    margin-right: 0%;
+    margin-top: 0px;
+    padding: 1%;
+    border-radius: 10px;
+    padding-left: 2%;
+    padding-right: 2%;
+    align-items: center;
+
+}
+body{
+    
+    background-color: whitesmoke;
+    color: black;
+    font-size: medium;
+    font-weight: bold;
+}
+.isale {
+    display:flex;
+    justify-content: space-between;
+    color: black;
+    font-weight: bolder;
+
+    
+}
+
+
+.Search {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    
+}
+
+.search-box{
+    width:400px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: violet;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+
+.profile{
+    display: flex;
+    justify-content: space-between;
+
+}
+.table {
+    text-align: center;
+    display: block;
+    justify-content: center;
+}
+.table tbody{
+    display: block;
+}
+.table tbody tr{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 15px;
+
+}
+.table tbody tr th{
+    text-align: center;
+    background-color:whitesmoke;
+    border-radius: 10px;
+}
+.table tbody tr th img{
+    display:inline;
+    height: 300px;
+    text-decoration: dashed;
+    justify-content:space-evenly;
+    border-radius: 20px;
+}
+
+
+
+.login{
+    margin: 25%;
+    margin-top: 5%;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: 20px;
+    background-color: beige;
+    border-radius: 20px;
+}
+
+
+.login form input{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    margin-top: 20px;
+    background-color: violet;
+    font-size: medium;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+#login-submit{
+    padding: 10px;
+    margin: 20px;
+    width: 25%;
+    background-color: red;
+    border: none;
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.h1-login{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content:space-evenly;
+}
+
+.login-body{
+    display:grid;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+}
+
+.profile-bar{
+    position: absolute;
+    display: none;
+    width: 20%;
+    background-color: blueviolet;
+    top: 0;
+    right: 0;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.view-pro{
+    align-items: center;
+    position: absolute;
+    display: none;
+    width: 20%;
+    background-color: blueviolet;
+    top: 0;
+    right: 0;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+
+}
+
+.view-pro h2{
+    text-align: left;
+    padding-left: 15px;
+}
+.shadow{
+    background-color: black;
+    opacity: 0.8;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+}
+
+.shadowpro{
+    background-color: black;
+    opacity: 0.8;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: block;
+}
+.view-product{
+    margin-top: 5%;
+    position: absolute;
+    display: block;
+    width: 60%;
+    background-color: blueviolet;
+    padding: 15px;
+    border-radius: 10px;
+    justify-content: center;
+    z-index: 2;
+    top: 20%;
+    left: 20%;
+    text-align: center;
+}
+
+
+.view-product form{
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    padding-left: 10%;
+    padding-right: 10%;
+
+}
+
+.view-product form button{
+    background-color:violet;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+}
+.view-product form input{
+    background-color:violet;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+}
+.view-product i{
+    display: flex;
+    left: 10px;
+    font-size: larger;
+}
+
+.sale-product{
+    position: absolute;
+    display: block;
+    width: 60%;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    justify-content: center;
+    top: 28%;
+    left: 20%;
+    text-align: center;
+    margin-top: 55px;
+    margin-bottom: 50px;
+}
+.sale-product form{
+    display:grid;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    
+}
+.sale-product form input{
+    padding: 10px;
+    margin: 10px;
+    width: 90%;
+    background-color: wheat;
+    font-size: medium;
+    font-weight: bold;
+    color: gray;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.sale-product form select{
+    padding: 10px;
+    margin: 10px;
+    width: 90%;
+    background-color: wheat;
+    font-size: medium;
+    font-weight: bold;
+    color: gray;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+}
+.sale-product form div button{
+    padding: 10px;
+    margin: 20px;
+    width: 30%;
+    background-color: black;
+    border: none;
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+.sale-product form div a{
+    padding: 10px;
+    margin: 20px;
+    width: 30%;
+    background-color:black;
+    border: none;
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+
+.view-cart{
+    position: absolute;
+    display: none;
+    width: 60%;
+    background-color: blueviolet;
+    padding: 15px;
+    border-radius: 10px;
+    justify-content: center;
+    z-index: 2;
+    top: 20%;
+    left: 20%;
+    text-align: center;
+
+}
+
+.view-cart div{
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    padding-left: 10%;
+    padding-right: 10%;
+
+}
+
+.view-cart div p{
+    background-color:violet;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+}
+.view-cart i{
+    display: flex;
+    left: 10px;
+    font-size: larger;
+}
+
+.footer {
+    background-color: blueviolet;
+    color: violet;
+    display:flex;
+    justify-content: space-between;
+    margin-top: 0px;
+    border-radius: 10px;
+    padding-left: 10%;
+    padding-right: 10%;
+    align-items: center;
+    font-size: small;
+
+}
+
+.alertmsg{
+    z-index: 1;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px;
+    background-color: green;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.orderback{
+    margin-top: 10px;
+    background-color: antiquewhite;
+    border-radius: 5px;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.order-product{
+    position: absolute;
+    display: block;
+    background-color: blueviolet;
+    padding: 15px;
+    border-radius: 10px;
+    justify-content: center;
+    top: 28%;
+    left: 30%;
+    text-align: center;
+    margin-top: 55px;
+    padding-bottom: 10px;
+}
+
+   .order-product table tr td{
+    display: block;
+    justify-content: space-between;
+    border: none;
+    text-align: center;
+    font-size: large;
+    
+   }
+   .order-product table{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 55px; 
+   }
+   
+
+@media (max-width:600px ){
+    .search-box{
+        width: 200px;
+    }
+   .login {
+    justify-content: center;
+    width: 70%;
+    align-items: center;
+    margin-left: 20px;
+   }
+   #login-submit{
+    padding-right: 10px;
+    background-color: greenyellow;
+    width: 50%;
+   }
+   .profile-bar{
+    width: 50%;
+   }
+   .view-pro{
+    width: 50%;
+   }
+   .table tbody tr{
+    grid-template-columns: repeat(1,1fr);
+
+   }
+   #view-product{
+    width: 70%;
+    left: 20px;
+   }
+   #view-product form input{
+    width: 20%;
+   }
+   .order-product table,thead,th,td,tr{
+    display: block;
+    
+   }
+   .order-product{
+    left: 10px;
+   }
+   .order-product tr th{
+    display: none;
+   }
+   .order-product tr td{
+    display: flex;
+    justify-content: space-between;
+   }
+
+   .sale-product{
+    width: 70%;
+    left: 12%;
+   }
+    .sale-product form div button{
+        text-align: center;
+        padding-right:70px;
+        margin-right: -5px;
+    }
+
+}

@@ -1,0 +1,8 @@
+{
+	"command": "node app.js",
+	"build_path": "C:\\Users\\mani\\Documents\\kk",
+	"stack": "node20",
+	"env_variables": {},
+	"memory": 256,
+	"scripts": {}
+}
