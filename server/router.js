@@ -22,8 +22,8 @@ const otpStore = new Map();
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.mvasagan099@gmail.com,
-        pass: process.env.ibus okoy tszq fufb
+        user: mvasagan099@gmail.com,
+        pass: ibus okoy tszq fufb
     }
 });
 
@@ -1918,6 +1918,7 @@ router.post('/editstatuspro/:id',(req,res)=>{
 
 
 module.exports=router;
+
 
 
 
