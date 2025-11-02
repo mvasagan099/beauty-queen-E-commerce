@@ -45,7 +45,7 @@ router.post("/send-otp", async (req, res) => {
   otpStore.set(email, { otp, expiresAt });
 
   const mailOptions = {
-    from: "Beautyqueen@gmail.com",
+    from: `"Beauty Queen" <mvasagan099@gmail.com>`,
     to: email,
     subject: "Beauty Queen OTP Code",
     text: `Your OTP is ${otp}. It will expire in 5 minutes.`
@@ -1919,4 +1919,5 @@ router.post('/editstatuspro/:id',(req,res)=>{
 
 
 module.exports=router;
+
 
