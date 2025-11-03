@@ -13,18 +13,29 @@ const sharp = require("sharp");
 const path = require("path");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
 
+dotenv.config();
 router.use(bodyParser.urlencoded({ extended: true }));
 
 const otpStore = new Map();
 
 // Nodemailer setup (use your credentials or app password)
+/*
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: "mvasagan099@gmail.com",
         pass: "ibus okoy tszq fufb"
     }
+});
+*/
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
 });
 
 function generateOtp() {
@@ -35,51 +46,67 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/send-otp", async (req, res) => {
-  const email = req.body.email;
+  const { email } = req.body;
   const otp = generateOtp();
   const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes
 
   otpStore.set(email, { otp, expiresAt });
 
   const mailOptions = {
-    from: `"Beauty Queen" <mvasagan099@gmail.com>`,
+    from: `"Beauty Queen" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: "Beauty Queen OTP Code",
-    text: `Your OTP is ${otp}. It will expire in 5 minutes.`
+    html: `
+      <div style="font-family:sans-serif">
+        <h2>Beauty Queen Email Verification</h2>
+        <p>Your OTP is <b>${otp}</b>.</p>
+        <p>This code will expire in 5 minutes.</p>
+      </div>
+    `,
   };
 
   try {
     await transporter.sendMail(mailOptions);
-    res.render("verify", { email, message: "OTP sent successfully!" ,layout:false});
+    res.render("verify", { email, message: "OTP sent successfully!", layout: false });
   } catch (err) {
     console.error("Email send error:", err);
-    res.send("Error sending OTP. Check your email credentials.");
+    res.render("login", { message: "Error sending OTP. Check email settings.", layout: false });
   }
 });
 
+// Verify OTP
 router.post("/verify-otp", (req, res) => {
   const { email, otp } = req.body;
   const record = otpStore.get(email);
 
   if (!record) {
-    return res.render("verify", { email, message: "No OTP found for this email." ,layout:false});
+    return res.render("verify", { email, message: "No OTP found for this email.", layout: false });
   }
 
   if (Date.now() > record.expiresAt) {
     otpStore.delete(email);
-    return res.render("verify", { email, message: "OTP expired. Please try again." ,layout:false});
+    return res.render("verify", { email, message: "OTP expired. Please try again.", layout: false });
   }
 
   if (otp === record.otp) {
     otpStore.delete(email);
+
+    // ✅ Update database: mark user verified (if exists)
+    const sql = `
+      INSERT INTO users (email, isVerified)
+      VALUES (?, 1)
+      ON DUPLICATE KEY UPDATE isVerified = 1;
+    `;
+    db.query(sql, [email], (err) => {
+      if (err) console.error("DB update error:", err);
+    });
+
     res.cookie("email", email, { maxAge: 1000 * 60 * 60 * 24 * 365, httpOnly: true });
-    res.redirect('/home');
+    res.redirect("/home");
   } else {
-    res.render("verify", { email, message: "Invalid OTP. Try again." ,layout:false});
+    res.render("verify", { email, message: "Invalid OTP. Try again.", layout: false });
   }
 });
-
-
 
 
 
@@ -128,8 +155,13 @@ async function processImage(file, filename) {
   }
 }
 
-
-
+const db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+});
+/*
 const conn= mysql.createPool({
    host : 'bk2nvpf0xk0pinn1tpkl-mysql.services.clever-cloud.com',
    user : 'up3xfdpyoeuoafgw',
@@ -137,7 +169,7 @@ const conn= mysql.createPool({
    database : 'bk2nvpf0xk0pinn1tpkl'
    
 });
-
+*/
 /*
 const conn= mysql.createPool({
    host : 'localhost',
@@ -1916,6 +1948,7 @@ router.post('/editstatuspro/:id',(req,res)=>{
 
 
 module.exports=router;
+
 
 
 
