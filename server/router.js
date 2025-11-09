@@ -230,6 +230,81 @@ router.post("/upipayment", async (req, res) => {
 });
 
 
+
+// Connect to MySQL
+connection.connect((err) => {
+  if (err) {
+    console.error("❌ Error connecting to database:", err);
+    return;
+  }
+  console.log("✅ Connected to MySQL database");
+
+  // SQL to create products table
+  const createProductsTable = `
+    CREATE TABLE IF NOT EXISTS products (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(100),
+      price INT,
+      description TEXT,
+      image LONGBLOB,
+      mrp INT,
+      quantity INT,
+      ptype VARCHAR(100),
+      image1 LONGBLOB,
+      image2 LONGBLOB,
+      image3 LONGBLOB,
+      image4 LONGBLOB,
+      size_s INT,
+      size_m INT,
+      size_l INT,
+      size_xl INT,
+      size_xxl INT
+    );
+  `;
+
+  // SQL to create orders table
+  const createOrdersTable = `
+    CREATE TABLE IF NOT EXISTS orders (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      productid INT NOT NULL,
+      name VARCHAR(255),
+      size VARCHAR(50),
+      price DECIMAL(10,2),
+      quantity INT,
+      subtotal DECIMAL(10,2),
+      username VARCHAR(255),
+      email VARCHAR(255),
+      address TEXT,
+      pincode VARCHAR(20),
+      district VARCHAR(100),
+      landmark VARCHAR(255),
+      payment_method VARCHAR(50),
+      status VARCHAR(50) DEFAULT 'Pending',
+      order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (productid) REFERENCES products(id)
+    );
+  `;
+
+  // Execute table creation
+  connection.query(createProductsTable, (err) => {
+    if (err) {
+      console.error("❌ Error creating products table:", err);
+      return;
+    }
+    console.log("✅ Products table created successfully");
+
+    connection.query(createOrdersTable, (err) => {
+      if (err) {
+        console.error("❌ Error creating orders table:", err);
+        return;
+      }
+      console.log("✅ Orders table created successfully");
+
+      connection.end(); // Close connection
+    });
+  });
+});
+
 router.get('/',(req,res)=>{
     res.redirect('/home');
 });
@@ -1900,6 +1975,7 @@ router.get('/health', (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
