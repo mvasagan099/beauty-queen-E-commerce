@@ -14,154 +14,87 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
-
+const Brevo = require("@getbrevo/brevo");
 dotenv.config();
 router.use(bodyParser.urlencoded({ extended: true }));
 
 const otpStore = new Map();
 
-// Nodemailer setup - Gmail configuration
-// Use Gmail app password (not regular password)
-// To generate app password: Google Account > Security > 2-Step Verification > App passwords
-let transporter = null;
+// Initialize Brevo API
+const brevoApi = new Brevo.TransactionalEmailsApi();
+brevoApi.setApiKey(Brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY );
 
-// Only create transporter if credentials are available
-const gmailUser = process.env.GMAIL_USER;
-const gmailPass = process.env.GMAIL_APP_PASSWORD;
-
-if (gmailUser && gmailPass) {
-  try {
-    transporter = nodemailer.createTransport({
-      service: "gmail",
-      host: "smtp.gmail.com", // Gmail SMTP server
-      port: 465, // Standard secure port
-      secure: true, // Use SSL/TLS
-      auth: {
-        user: gmailUser,
-        pass: gmailPass
-      },
-      // Add connection timeout and retry options
-      connectionTimeout: 10000,
-      greetingTimeout: 10000,
-      socketTimeout: 10000,
-    });
-
-    // Verify transporter connection on startup (non-blocking for deployment)
-    // This runs asynchronously and won't block server startup
-    setTimeout(() => {
-      if (transporter) {
-        transporter.verify(function (error, success) {
-          if (error) {
-            console.error("⚠️ Email transporter verification failed:", error.message);
-            console.error("📧 Email functionality may not work. Check Gmail credentials in environment variables.");
-          } else {
-            console.log("✅ Email transporter is ready to send emails");
-          }
-        });
-      }
-    }, 2000); // Delay verification to allow server to start first
-  } catch (err) {
-    console.error("⚠️ Failed to create email transporter:", err.message);
-    transporter = null;
-  }
-} else {
-  console.warn("⚠️ Gmail credentials not found. Email functionality will be disabled.");
-  console.warn("📧 Set GMAIL_USER and GMAIL_APP_PASSWORD in Catalyst environment variables.");
-}
-
+// Utility to generate OTP
 function generateOtp() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
+
+// ✅ Render login page
 router.get("/login", (req, res) => {
-  return res.render("login",{layout:false});
+  return res.render("login", { layout: false });
 });
 
+// ✅ Send OTP using Brevo API
 router.post("/send-otp", async (req, res) => {
   const email = req.body.email;
   const otp = generateOtp();
-  const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes
+  const expiresAt = Date.now() + 5 * 60 * 1000; // 5 min validity
 
   otpStore.set(email, { otp, expiresAt });
 
-  const mailOptions = {
-    from: `"Beauty Queen" <${process.env.GMAIL_USER || 'mvasagan099@gmail.com'}>`,
-    to: email,
+  const emailData = {
+    sender: { name: "Beauty Queen", email: "mvasagan099@gmail.com" }, // can use your Gmail if domain not verified
+    to: [{ email }],
     subject: "Beauty Queen OTP Code",
-    text: `Your OTP is ${otp}. It will expire in 5 minutes.`,
-    html: `
-      <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px;">
-        <h2 style="color: #333; margin-bottom: 20px;">Beauty Queen OTP Verification</h2>
-        <p style="font-size: 16px; color: #555;">Your OTP code is:</p>
-        <div style="background-color: #f8f9fa; padding: 20px; text-align: center; border-radius: 5px; margin: 20px 0;">
-          <strong style="font-size: 32px; color: #d63384; letter-spacing: 5px;">${otp}</strong>
-        </div>
-        <p style="color: #666; font-size: 14px;">This OTP will expire in 5 minutes.</p>
-        <p style="color: #999; font-size: 12px; margin-top: 30px; border-top: 1px solid #e0e0e0; padding-top: 15px;">If you didn't request this OTP, please ignore this email.</p>
+    htmlContent: `
+      <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; border: 1px solid #e0e0e0; border-radius: 8px;">
+        <h2 style="color: #d63384;">Beauty Queen OTP Verification</h2>
+        <p>Your OTP code is:</p>
+        <h1 style="letter-spacing: 4px;">${otp}</h1>
+        <p>This OTP will expire in 5 minutes.</p>
+        <p style="color:#777;">If you didn’t request this OTP, please ignore this email.</p>
       </div>
     `
   };
 
-  // Check if transporter is available
-  if (!transporter) {
-    console.error("❌ Email transporter not configured");
-    return res.render("verify", { 
-      email, 
-      message: "Email service is not configured. Please contact support.", 
-      layout: false 
-    });
-  }
-
   try {
-    await transporter.sendMail(mailOptions);
+    await brevoApi.sendTransacEmail(emailData);
     console.log(`✅ OTP sent successfully to ${email}`);
-    res.render("verify", { email, message: "OTP sent successfully! Please check your email." ,layout:false});
-  } catch (err) {
-    console.error("❌ Email send error:", err.message);
-    console.error("Error code:", err.code);
-    
-    // Provide more helpful error messages
-    let errorMessage = "Error sending OTP. Please try again.";
-    if (err.code === 'EAUTH') {
-      errorMessage = "Email authentication failed. Please contact support or try again later.";
-      console.error("🔐 Authentication Error - Check Gmail App Password:");
-      console.error("   1. Go to: https://myaccount.google.com/apppasswords");
-      console.error("   2. Generate a new App Password for 'Mail'");
-      console.error("   3. Update the password in your .env file or code");
-    } else if (err.code === 'ECONNECTION' || err.code === 'ETIMEDOUT') {
-      errorMessage = "Connection timeout. Please check your internet connection and try again.";
-    } else if (err.response) {
-      errorMessage = `Email service error: ${err.response}`;
-    }
-    
+    res.render("verify", { email, message: "OTP sent successfully! Please check your email.", layout: false });
+  } catch (error) {
+    console.error("❌ Error sending OTP via Brevo:", error.message);
+    console.error(error.response?.text || error);
     res.render("verify", { 
-      email, 
-      message: errorMessage, 
-      layout: false 
+      email,
+      message: "Error sending OTP. Please try again later.",
+      layout: false
     });
   }
 });
 
+// ✅ Verify OTP
 router.post("/verify-otp", (req, res) => {
   const { email, otp } = req.body;
   const record = otpStore.get(email);
 
   if (!record) {
-    return res.render("verify", { email, message: "No OTP found for this email." ,layout:false});
+    return res.render("verify", { email, message: "No OTP found for this email.", layout: false });
   }
 
   if (Date.now() > record.expiresAt) {
     otpStore.delete(email);
-    return res.render("verify", { email, message: "OTP expired. Please try again." ,layout:false});
+    return res.render("verify", { email, message: "OTP expired. Please try again.", layout: false });
   }
 
   if (otp === record.otp) {
     otpStore.delete(email);
     res.cookie("email", email, { maxAge: 1000 * 60 * 60 * 24 * 365, httpOnly: true });
-    res.redirect('/home');
+    return res.redirect("/home");
   } else {
-    res.render("verify", { email, message: "Invalid OTP. Try again." ,layout:false});
+    return res.render("verify", { email, message: "Invalid OTP. Try again.", layout: false });
   }
 });
+
 
 
 
@@ -1967,6 +1900,7 @@ router.get('/health', (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
