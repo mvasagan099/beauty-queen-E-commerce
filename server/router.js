@@ -33,6 +33,9 @@ if (gmailUser && gmailPass) {
   try {
     transporter = nodemailer.createTransport({
       service: "gmail",
+      host: "smtp.gmail.com", // Gmail SMTP server
+      port: 465, // Standard secure port
+      secure: true, // Use SSL/TLS
       auth: {
         user: gmailUser,
         pass: gmailPass
@@ -1964,6 +1967,7 @@ router.get('/health', (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
