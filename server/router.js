@@ -164,75 +164,8 @@ try {
     keepAliveInitialDelay: 0
   });
 
-  // Test database connection (non-blocking for deployment)
-  setTimeout(() => {
-    if (conn) {
-      conn.getConnection((err, connection) => {
-        if (err) {
-          console.error('⚠️ Database connection error:', err.message);
-          console.error('📊 Database queries may fail. Check database credentials in Catalyst environment variables.');
-        } else {
-          console.log('✅ Database connection successful');
-          connection.release();
-        }
-      });
-    }
-  }, 2000); // Delay to allow server to start first
-} catch (err) {
-  console.error('⚠️ Failed to create database connection pool:', err.message);
-  console.error('📊 Database functionality will be disabled. Check database credentials.');
-  conn = null;
-}
-
-const razorpay = new Razorpay({
-  key_id: 'rzp_test_RYAiLF3jXWjUtv',       // Replace with your Razorpay Key ID
-  key_secret: 'TQit1JBhJCwbfqBV2V6WEkuX'    // Replace with your Razorpay Secret
-});
-router.post("/upipayment", async (req, res) => {
-  const { username, email, address, pincode, district, landmark, productid, size, quantity, total } = req.body;
-
-  // Convert all product fields to arrays
-  const productIds = Array.isArray(productid) ? productid : [productid];
-  const sizes = Array.isArray(size) ? size : [size];
-  const quantities = Array.isArray(quantity) ? quantity : [quantity];
-  const totals = Array.isArray(total) ? total : [total];
-
-  try {
-    // Create Razorpay order
-    const options = {
-      amount: totals.reduce((a, b) => parseInt(a) + parseInt(b), 0) * 100, // paise
-      currency: "INR",
-      receipt: "order_rcptid_" + Math.floor(Math.random() * 10000)
-    };
-    const razorpayOrder = await razorpay.orders.create(options);
-
-    // Render Razorpay checkout page
-    res.render("razorpay", {
-      layout: false,
-      key_id: razorpay.key_id,
-      order_id: razorpayOrder.id,
-      username,
-      email,
-      total: totals.reduce((a, b) => parseInt(a) + parseInt(b), 0),
-      productIds,
-      sizes,
-      quantities,
-      totals,
-      address,
-      pincode,
-      district,
-      landmark
-    });
-  } catch (err) {
-    console.log(err);
-    res.send("Error creating Razorpay order: " + err.message);
-  }
-});
-
-
-
 // Connect to MySQL
-conn.connect((err) => {
+conn.getConnection((err,connection) => {
   if (err) {
     console.error("❌ Error connecting to database:", err);
     return;
@@ -300,10 +233,77 @@ conn.connect((err) => {
       }
       console.log("✅ Orders table created successfully");
 
-      connection.end(); // Close connection
+      connection.release(); // Close connection
     });
   });
 });
+
+  // Test database connection (non-blocking for deployment)
+  setTimeout(() => {
+    if (conn) {
+      conn.getConnection((err, connection) => {
+        if (err) {
+          console.error('⚠️ Database connection error:', err.message);
+          console.error('📊 Database queries may fail. Check database credentials in Catalyst environment variables.');
+        } else {
+          console.log('✅ Database connection successful');
+          connection.release();
+        }
+      });
+    }
+  }, 2000); // Delay to allow server to start first
+} catch (err) {
+  console.error('⚠️ Failed to create database connection pool:', err.message);
+  console.error('📊 Database functionality will be disabled. Check database credentials.');
+  conn = null;
+}
+
+const razorpay = new Razorpay({
+  key_id: 'rzp_test_RYAiLF3jXWjUtv',       // Replace with your Razorpay Key ID
+  key_secret: 'TQit1JBhJCwbfqBV2V6WEkuX'    // Replace with your Razorpay Secret
+});
+router.post("/upipayment", async (req, res) => {
+  const { username, email, address, pincode, district, landmark, productid, size, quantity, total } = req.body;
+
+  // Convert all product fields to arrays
+  const productIds = Array.isArray(productid) ? productid : [productid];
+  const sizes = Array.isArray(size) ? size : [size];
+  const quantities = Array.isArray(quantity) ? quantity : [quantity];
+  const totals = Array.isArray(total) ? total : [total];
+
+  try {
+    // Create Razorpay order
+    const options = {
+      amount: totals.reduce((a, b) => parseInt(a) + parseInt(b), 0) * 100, // paise
+      currency: "INR",
+      receipt: "order_rcptid_" + Math.floor(Math.random() * 10000)
+    };
+    const razorpayOrder = await razorpay.orders.create(options);
+
+    // Render Razorpay checkout page
+    res.render("razorpay", {
+      layout: false,
+      key_id: razorpay.key_id,
+      order_id: razorpayOrder.id,
+      username,
+      email,
+      total: totals.reduce((a, b) => parseInt(a) + parseInt(b), 0),
+      productIds,
+      sizes,
+      quantities,
+      totals,
+      address,
+      pincode,
+      district,
+      landmark
+    });
+  } catch (err) {
+    console.log(err);
+    res.send("Error creating Razorpay order: " + err.message);
+  }
+});
+
+
 
 router.get('/',(req,res)=>{
     res.redirect('/home');
@@ -1975,6 +1975,7 @@ router.get('/health', (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
