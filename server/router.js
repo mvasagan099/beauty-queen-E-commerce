@@ -216,10 +216,10 @@ let conn = null;
 
 try {
   conn = mysql.createPool({
-    host: process.env.DB_HOST || process.env.MYSQL_HOST || 'localhost',
-    user: process.env.DB_USER || process.env.MYSQL_USER || 'root',
-    password: process.env.DB_PASS || process.env.MYSQL_PASSWORD || 'mani6217',
-    database: process.env.DB_NAME || process.env.MYSQL_DATABASE || 'mani',
+    host: process.env.DB_HOST || process.env.MYSQL_HOST,
+    user: process.env.DB_USER || process.env.MYSQL_USER,
+    password: process.env.DB_PASS || process.env.MYSQL_PASSWORD ,
+    database: process.env.DB_NAME || process.env.MYSQL_DATABASE,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
@@ -1964,6 +1964,7 @@ router.get('/health', (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
