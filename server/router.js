@@ -19,7 +19,7 @@ dotenv.config();
 router.use(bodyParser.urlencoded({ extended: true }));
 
 const otpStore = new Map();
-
+const caCert = fs.readFileSync("./server/ca.pem");
 // Initialize Brevo API
 const brevoApi = new Brevo.TransactionalEmailsApi();
 brevoApi.setApiKey(Brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY );
@@ -154,16 +154,19 @@ try {
   conn = mysql.createPool({
     host: process.env.DB_HOST || process.env.MYSQL_HOST,
     user: process.env.DB_USER || process.env.MYSQL_USER,
-    password: process.env.DB_PASS || process.env.MYSQL_PASSWORD ,
+    password: process.env.DB_PASS || process.env.MYSQL_PASSWORD,
     database: process.env.DB_NAME || process.env.MYSQL_DATABASE,
+    port:26141,
+    ssl: {
+      ca: caCert,   // required for Aiven
+      rejectUnauthorized: true
+    },
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
-    // Valid MySQL2 pool options
     enableKeepAlive: true,
-    keepAliveInitialDelay: 0
+    keepAliveInitialDelay: 0,
   });
-
 // Connect to MySQL
 conn.getConnection((err,connection) => {
   if (err) {
@@ -1975,6 +1978,7 @@ router.get('/health', (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
