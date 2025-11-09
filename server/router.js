@@ -232,7 +232,7 @@ router.post("/upipayment", async (req, res) => {
 
 
 // Connect to MySQL
-connection.connect((err) => {
+conn.connect((err) => {
   if (err) {
     console.error("❌ Error connecting to database:", err);
     return;
@@ -1975,6 +1975,7 @@ router.get('/health', (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
