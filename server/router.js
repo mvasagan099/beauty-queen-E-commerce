@@ -262,8 +262,8 @@ conn.getConnection((err,connection) => {
 }
 
 const razorpay = new Razorpay({
-  key_id: 'rzp_test_RYAiLF3jXWjUtv',       // Replace with your Razorpay Key ID
-  key_secret: 'TQit1JBhJCwbfqBV2V6WEkuX'    // Replace with your Razorpay Secret
+  key_id:process.env.R_id,//      // Replace with your Razorpay Key ID
+  key_secret:process.env.R_key   // Replace with your Razorpay Secret
 });
 router.post("/upipayment", async (req, res) => {
   const { username, email, address, pincode, district, landmark, productid, size, quantity, total } = req.body;
@@ -1978,6 +1978,7 @@ router.get('/health', (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
