@@ -1928,7 +1928,17 @@ router.post('/editthispro',(req,res)=>{
         });
     });
 });
-
+router.post('/deleteorder',(req,res)=>{
+    const id =req.body.id;
+    console.log(id);
+    conn.getConnection((err,connection)=>{
+        if (err ) throw err;
+        connection.query('delete from orders where id =?',[id],(err)=>{
+            if(err) return res.status(500).send('error in deleting product');
+            res.render('allmanagerpro',{error:"order deleted successfully!",layout:false});
+        })
+    })
+})
 router.post('/editthispross/:id',(req,res)=>{
     const id =req.params.id;
     const {name,price,description,mrp,size_s,size_m,size_l,size_xl,size_xxl} = req.body;
@@ -1978,6 +1988,7 @@ router.get('/health', (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
